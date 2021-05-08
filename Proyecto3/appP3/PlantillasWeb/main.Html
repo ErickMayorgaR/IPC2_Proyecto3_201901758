@@ -1,52 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Formulario</title>
-	<link rel="stylesheet" type="text/css"  media=""  href="Hojaestilo.css">
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario</title>
+    <link rel="stylesheet" type="text/css" media="" href=" {% static 'appP3/maincss.css' %} ">
 
 </head>
-<center>
-
 <body>
 
 <header>
-<h1>Formulario de Registro</h1>
+<nav>
+    <div id="barra">
+        <ul id='menu'>
+            <li><a href="" onclick="document.getElementById('archivo1').click();"> Cargar Archivo
+            </a></li>
+            <li><a href="">Peticiones</a>
+                <ul>
+                    <li> <a href=""> Colsultar Datos </a> </li>
+                    <li> <a href="">Filtrar Datos por Fecha y Usuario</a> </li>
+                    <li> <a href="">Filtar por Fecha y Codigo de Error</a> </li>
+                </ul>
+            </li>
+            <li><a href="">Ayuda</a>
+                <ul>
+                    <li><a href="">Informacion</a></li>
+                    <li><a href="">Documentacion</a></li>
+                </ul>
+            </li>
+
+        </ul>
+    </div>
+</nav>
+
 </header>
 
-<form>
-	<label for="texto"> Nombre </label>
-	<br>
-	<input id="texto" type="Text" placeholder="Ingrese su nombre">
-	<br>
-    <br>
+<div id = "areas">
+    <form action = "" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
 
-	<label for="texto"> Correo </label>
-	<br>
-	<input id="texto" type="email" placeholder="Ingrese su correo">
-	<br>
-    <br>
+    <input id="file" name="file" type="file" value="Cargar Archivo" />
 
-	<label for="texto"> Contraseña </label>
-	<br>
-	<input id="texto" type="password" placeholder="Ingrese su contraseña">
-	<br>
-    <br>
+        <button id="Enviar" type="submit" >Enviar</button>
+     </form>
 
-    <label for="texto"> Confirmar contraseña </label>
-    <br>
-	<input id="texto" type="password" placeholder="Confirme su contraseña">
-	<br>
-    <br>
 
-    <label for="fecha"> Nombre </label>
-	<br>
-	<input id="fecha" type="date" placeholder="">
-	<br>
-	<br>
+    <textarea   id = "Area1" readonly = "yes" style="">
+        {{datosEntrada1}}
+    </textarea>
 
-</form>
+    <textarea   id = "Area2" readonly = "yes" style="">
+        Hard - ubica un enter al final de cada linea y envía el texto en el mismo formato en el que fue introducido.
+    </textarea>
+
+
+</div>
 </body>
-</center>
+
 </html>

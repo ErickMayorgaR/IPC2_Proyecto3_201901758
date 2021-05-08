@@ -1,0 +1,124 @@
+
+/*
+header{
+	width:500px;
+	height:80px;
+	background:#2915E5;
+	text-align:center;
+	line-height: 70px;
+	border-radius:8px;
+	margin:10px;
+
+	}
+body{
+    	background: black;
+    }
+    body form{
+    	background:white;
+    	width: 300px;
+    	padding: 10px;
+    }
+
+    body input{
+    	padding: 5px;
+    	margin: 5px;
+    	width: 200px;
+    	height: 10px;
+    }
+
+*/
+*{
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing:border-box:
+  box-sizing:border-box;
+}
+body{
+    	background: black;
+    }
+
+
+nav{
+
+
+  z-index: 10;
+  font-family: Helvetica;
+  width: 900px;
+  background: white;
+  margin: 30px auto;
+  text-align: center;
+
+}
+
+ul{
+  list-style: none;
+}
+#menu>li{
+  /*position:relative;*/
+  display:inline-block;
+  float: left;
+  text-align: center;
+
+}
+
+#menu li>a{
+  background-color:gray;
+  color: white;
+  padding: 10px;
+  display: block;
+  text-decoration: none;
+  min-width: 300px;
+  height:30;
+}
+
+#menu li>a:hover{
+  color: #000;
+  background-color: #eaeaea;
+
+}
+
+#menu>li>ul{
+  z-index: 11;
+  position:absolute;
+  display: none;
+}
+
+#menu>li:hover>ul {
+  display:block;
+}
+
+#areas{
+    position: relative;
+    top: 100px;
+    width: 1000px;
+    z-index:0;
+    margin: 30px auto;
+    background: white;
+    text-align: center;
+
+}
+
+#areas textarea{
+
+    z-index: 5;
+    padding: 50px;
+    margin: 5px;
+    width: 400px;
+    height: 400px;
+    word-break: break-all;
+    white-space: pre-wrap;
+}
+#areas #Enviar{
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100px;
+    height: 30px;
+    position: absolute;
+    margin: 10px;
+
+}
+
+*/

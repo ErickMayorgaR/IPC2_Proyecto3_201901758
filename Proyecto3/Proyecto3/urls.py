@@ -21,5 +21,5 @@ from appP3 import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('Algo/', views.main)
+    path('', views.main)
 ]
