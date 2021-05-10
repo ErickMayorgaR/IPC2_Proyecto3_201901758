@@ -14,6 +14,7 @@ class analizador:
     XML_inicial = None
     xml_final = None
     lista_total = []
+    lista_estadisticas = []
 
     def devolver_codigo_fecha(self, codigo):
         fecha = []
@@ -147,13 +148,62 @@ class analizador:
 
                 una_estadistica.errores.append(un_error)
                 listaEstadisticas.append(una_estadistica)
+
         for final_estadistica in listaEstadisticas:
             final_estadistica.afectados = list(set(final_estadistica.afectados))
-            self.lista_total.append(final_estadistica)
 
+
+        self.lista_estadisticas = listaEstadisticas
         xml_final = self.crearXML(listaEstadisticas,True )
+        if self.lista_total != []:
+            self.validarTotal(listaEstadisticas)
+        else:
+            self.lista_total = listaEstadisticas
 
         return xml_final
+
+
+    def validarTotal(self, lista):
+        lista_aux = lista
+        for estadistica_nueva in lista_aux:
+            f_estadistica = estadistica_nueva.fecha
+
+
+            existe_fecha = None
+            if self.lista_total != []:
+                for estadistica_total in self.lista_total:
+                    if estadistica_total.fecha == f_estadistica:
+                        contador_us = 0
+                        for un_usuario in estadistica_nueva.usuarios:
+
+                            ex_usuario = self.existe_total(estadistica_total.usuarios, un_usuario, "usuario")
+                            if ex_usuario == False:
+                                estadistica_total.usuarios.append(un_usuario)
+                            else:
+                                estadistica_total.usuarios[contador_us].cantidad += un_usuario.cantidad
+                            estadistica_total.mensajesFecha += (un_usuario.cantidad)
+                            contador_us +=1
+
+
+
+                        for afectado in estadistica_nueva.afectados:
+                            if afectado not in estadistica_nueva.afectados:
+                                estadistica_total.afectados.append(afectado)
+
+
+                        for un_error in estadistica_nueva.errores:
+                            ex_error = self.existe_total(estadistica_total.errores, un_error, "error")
+                            if ex_error == False:
+                                estadistica_total.errores.append(un_error)
+
+                        existe_fecha = True
+                    else:
+                        continue
+
+            if existe_fecha != True:
+                self.lista_total.append(estadistica_nueva)
+        return
+
 
     def crearXML(self, listaEstadisticas, almacenar):
         estadisticas_xml = Element("ESTADISTICAS")
@@ -197,6 +247,23 @@ class analizador:
         xml_final = reparsed.toprettyxml()
 
         return xml_final
+
+    def existe_total(self, elementos, posibleRep, tipo):
+        atributo = ""
+        for elemento in elementos:
+            if tipo == "usuario":
+                atributo = elemento.correo
+                if atributo == posibleRep.correo:
+                    return True
+            elif tipo == "error":
+                atributo = elemento.codigo
+                if atributo == posibleRep.codigo:
+                    return True
+
+
+            else:
+                continue
+        return False
 
     def existe(self, elementos, posibleRep, tipo):
         atributo = ""

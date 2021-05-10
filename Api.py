@@ -30,6 +30,9 @@ def obtener_codigo_fecha(codigo = None):
     return dict
 
 
-
+@app.route('/consulta/')
+def consultar():
+    datos = analizarEnvio.consultar_datos()
+    return datos
 
 app.run(debug = True)

@@ -18,15 +18,15 @@
             </a></li>
             <li><a href="">Peticiones</a>
                 <ul>
-                    <li> <a href=""> Colsultar Datos </a> </li>
+                    <li> <a href="/Consultar/"> Colsultar Datos </a> </li>
                     <li> <a href="/FechaUsuario/">Filtrar Datos por Fecha y Usuario</a> </li>
                     <li> <a href="/FechaCodigo/">Filtar por Fecha y Codigo de Error</a> </li>
                 </ul>
             </li>
             <li><a href="">Ayuda</a>
                 <ul>
-                    <li><a href="">Informacion</a></li>
-                    <li><a href="">Documentacion</a></li>
+                    <li><a href="/Informacion/">Informacion</a></li>
+                    <li><a href="/Documentacion/">Documentacion</a></li>
                 </ul>
             </li>
 
@@ -45,6 +45,7 @@
         <button id="Enviar" type="submit" >Enviar</button>
      </form>
 
+<button onclick="location.href=''">Resetear</button>
 
     <textarea   id = "Area1" readonly = "yes" style="">
         {{datosEntrada1}}

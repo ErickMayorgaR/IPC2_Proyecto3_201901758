@@ -80,9 +80,31 @@ def fecha_codigo(request):
 
 def consultar_datos(request):
     contexto = {
+    }
+    if request.method == "GET":
+        r = requests.get(endpoint + 'consulta/')
+        r3 = r.text
+        contexto = {
+            'datosSalida1': r3
+            }
+
+    print("llego")
+    return render(request, "Consultar.html", contexto)
+
+
+def informacion(request):
+    contexto = {
 
     }
-    return  (request, "Consultar.html", contexto)
+    return render(request, "Informacion.html", contexto)
+
+
+def documentacion(request):
+    contexto = {
+    }
+    return render(request,'Documentacion.html',contexto)
+
+
 #ruta = request.FILES.get('file')
  #           ruta = str(ruta)
  #directorio = 'XML/'
