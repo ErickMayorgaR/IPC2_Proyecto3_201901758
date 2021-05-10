@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultar Codigo</title>
+    <link rel="stylesheet" type="text/css" media="" href=" {% static 'appP3/busqueda.css' %} ">
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.2.0/chart.js"></script>
+</head>
+<body>
+<div id = "informacion">
+    <form action = "/FechaCodigo/" method="GET" >
+        {% csrf_token %}
+
+    <input id="Codigo" name="Codigo" type="text" placeholder="Ingrese un Codigo" />
+
+        <button id="Enviar" type="submit" >Enviar</button>
+     </form>
+
+</div>
+
+
+<div>
+<canvas id = "Grafica" width ="300" height="80"></canvas>
+</div>
+
+
+</body>
+<script>
+    let miCanvas = document.getElementById("Grafica").getContext("2d")
+
+    var chart = new Chart(miCanvas,{
+        type: "bar",
+        data:{
+            labels:{{labels|safe}},
+            datasets:[
+                {
+                    label:{{codigo}},
+                    backgroundColor: "rgb(0,0,0)",
+                    data:{{conteo|safe}}
+                }
+            ]
+        }
+    })
+</script>
+
+</body>
+</html>

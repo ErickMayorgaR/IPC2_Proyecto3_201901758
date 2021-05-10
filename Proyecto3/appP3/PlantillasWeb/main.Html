@@ -4,7 +4,7 @@
     {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario</title>
+    <title>Inicio</title>
     <link rel="stylesheet" type="text/css" media="" href=" {% static 'appP3/maincss.css' %} ">
 
 </head>
@@ -19,8 +19,8 @@
             <li><a href="">Peticiones</a>
                 <ul>
                     <li> <a href=""> Colsultar Datos </a> </li>
-                    <li> <a href="">Filtrar Datos por Fecha y Usuario</a> </li>
-                    <li> <a href="">Filtar por Fecha y Codigo de Error</a> </li>
+                    <li> <a href="/FechaUsuario/">Filtrar Datos por Fecha y Usuario</a> </li>
+                    <li> <a href="/FechaCodigo/">Filtar por Fecha y Codigo de Error</a> </li>
                 </ul>
             </li>
             <li><a href="">Ayuda</a>
@@ -51,7 +51,7 @@
     </textarea>
 
     <textarea   id = "Area2" readonly = "yes" style="">
-        Hard - ubica un enter al final de cada linea y envía el texto en el mismo formato en el que fue introducido.
+        {{datosSalida1}}
     </textarea>
 
 

@@ -19,7 +19,10 @@ from django.urls import path
 from appP3 import views
 
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.main)
+    path('', views.main),
+    path('FechaUsuario/', views.fecha_usuario),
+    path('FechaCodigo/', views.fecha_codigo)
 ]

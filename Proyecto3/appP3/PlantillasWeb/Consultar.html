@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Consultar</title>
+    <link rel="stylesheet" type="text/css" media="" href=" {% static 'appP3/maincss.css' %} ">
+</head>
+<body>
+<div id = "areas">
+    <form action = "" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <button id="Enviar" type="submit" >ConsultarDatos</button>
+     </form>
+
+
+    <textarea   id = "Area2" readonly = "yes" style="">
+        {{datosSalida1}}
+    </textarea>
+
+
+</div>
+</body>
+
+</body>
+</html>

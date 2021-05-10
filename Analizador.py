@@ -10,11 +10,55 @@ from xml.dom import minidom
 
 
 class analizador:
-    listaEstadisticas = []
+
     XML_inicial = None
-    XML_Final = None
+    xml_final = None
+    lista_total = []
+
+    def devolver_codigo_fecha(self, codigo):
+        fecha = []
+        cantidad_e = []
+        diccionario = {}
+
+        for estadistica in self.lista_total:
+            for error in estadistica.errores:
+                if error.codigo == codigo:
+                    cantidad_e.append(error.cantidad)
+                    fecha.append(estadistica.fecha)
+
+        diccionario['Fecha'] = fecha
+        diccionario['Cantidad'] = cantidad_e
+        return diccionario
+
+
+    def devolver_fecha_usuarios(self, fecha):
+        cantidad_l = []
+        usuarios_l = []
+        diccionario = {
+
+        }
+        string1 = self.lista_total[0].fecha
+        string2 = fecha
+        if string1 == string2:
+            print("Si")
+        for estadistica in self.lista_total:
+            if str(estadistica.fecha) == str(fecha):
+                for usuario in estadistica.usuarios:
+                    usuarios_l.append(usuario.correo)
+                    cantidad_l.append(usuario.cantidad)
+
+        diccionario['Cantidad'] = cantidad_l
+        diccionario['Usuarios'] = usuarios_l
+        return diccionario
+
+    def consultar_datos(self):
+        xml_total = self.crearXML(self.lista_total, False)
+
+        return xml_total
+
 
     def analizar(self, archivo):
+        listaEstadisticas = []
         r_fecha = r"(\d*\/\d*\/\d*)"
         r_correo = r"(([\w*]+@)+\w*[.]\w*[.]\w*[.]\w*)"
         r_error = r"(\d+)"
@@ -74,8 +118,8 @@ class analizador:
 
 
             existe_fecha = None
-            if self.listaEstadisticas != []:
-                for estadistica in self.listaEstadisticas:
+            if listaEstadisticas != []:
+                for estadistica in listaEstadisticas:
                     if estadistica.fecha == f_estadistica:
                         estadistica.mensajesFecha += 1
                         ex_usuario = self.existe(estadistica.usuarios,un_usuario.correo, "usuario")
@@ -102,14 +146,18 @@ class analizador:
                 una_estadistica.afectados = afectados
 
                 una_estadistica.errores.append(un_error)
-                self.listaEstadisticas.append(una_estadistica)
-        for final_estadistica in self.listaEstadisticas:
+                listaEstadisticas.append(una_estadistica)
+        for final_estadistica in listaEstadisticas:
             final_estadistica.afectados = list(set(final_estadistica.afectados))
-        self.crearXML()
+            self.lista_total.append(final_estadistica)
 
-    def crearXML(self):
+        xml_final = self.crearXML(listaEstadisticas,True )
+
+        return xml_final
+
+    def crearXML(self, listaEstadisticas, almacenar):
         estadisticas_xml = Element("ESTADISTICAS")
-        for estadistica_out in self.listaEstadisticas:
+        for estadistica_out in listaEstadisticas:
             estadistica_xml  = SubElement(estadisticas_xml, "ESTADISTICA")
 
             fecha_xml = SubElement(estadistica_xml, "FECHA")
@@ -147,7 +195,8 @@ class analizador:
 
         reparsed = minidom.parseString(xml_crudo)
         xml_final = reparsed.toprettyxml()
-        print(xml_final)
+
+        return xml_final
 
     def existe(self, elementos, posibleRep, tipo):
         atributo = ""
